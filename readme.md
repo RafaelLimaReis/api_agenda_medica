@@ -20,7 +20,7 @@ Api desenvolvida por integrantes do time **Social Health** para consumo de dados
             - database
         - Para iniciar api execute: `npm run api`
 - Duvidas sobre as rotas consulte o arquivo api.pdf na pasta docs
-- Possibilidade de importar request para Postman. Arquivo encontrado na docs (Hackaton.postman_collection)
+- ~~Possibilidade de importar request para Postman. Arquivo encontrado na docs (Hackaton.postman_collection)~~
 ---
 - Solução de possiveis erros identificados
     - Port default (8080) em uso
