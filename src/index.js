@@ -1,6 +1,7 @@
 const express = require('express');
 const config = require('../config');
 const consign = require('consign');
+const bodyParser = require('body-parser');
 
 const app = express();
 

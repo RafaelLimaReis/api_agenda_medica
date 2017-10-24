@@ -5,7 +5,7 @@ module.exports = {
   login: (cartaoSus) => {
     sql.close();
     return sql.connect(config.db).then(() => {
-      return sql.query`select p.nome, p.cartao_sus, b.bairro, r.endereco, p.dt_nasc, p.nr, p.telefone,
+      return sql.query`select p.matricula, p.nome, p.cartao_sus, b.bairro, r.endereco, p.dt_nasc, p.nr, p.telefone,
       p.celular, p.email, p.dt_ultimaatual, p.mae, p.sexo, p.doador, p.tipo_sangue from pacientes p
       inner join aux_bairro b on (b.cd_bai= p.cod_bairro )
       inner join aux_rua r on (r.cd_rua  = p.cd_rua )
@@ -132,6 +132,50 @@ module.exports = {
               and x.data_hora_sigs between Dateadd(dd, -360, Cast(Cast(Getdate() AS VARCHAR(12)) AS DATETIME)) and Cast(Cast(Getdate() AS VARCHAR(12)) AS DATETIME)
               and oc is null
             ORDER  BY dataagendamento  desc`
+    }).then(result => {
+      return result;
+    }).catch(err => {
+      console.log(err);
+      return err;
+    })
+  },
+  dadosCadastro: () => {
+    sql.close();
+    return sql.connect(config.db).then(() => {
+      return sql.query`
+      SELECT ap.Codigo,ap.Descricao
+      FROM dbo.aux_ativprof ap
+      INNER JOIN Aux_AtivProfMotivoPreAgendamento ma ON (ma.CodigoEspecialidade = ap.Codigo)
+      GROUP BY ap.Descricao, ap.Codigo
+      `
+    }).then(result => {
+      return result;
+    }).catch(err => {
+      console.log(err);
+      return err;
+    })
+  },
+  motivo: (id) => {
+    sql.close();
+    return sql.connect(config.db).then(() => {
+      return sql.query`
+      SELECT ap.MotivoAgendamentoEspecialidade
+      FROM dbo.Aux_AtivProfMotivoPreAgendamento ap
+      WHERE ap.CodigoEspecialidade = ${id}
+      `
+    }).then(result => {
+      return result;
+    }).catch(err => {
+      console.log(err);
+      return err;
+    })
+  },
+  solicitarPreAgendamento: (preAgendamento) => {
+    sql.close();
+    return sql.connect(config.db).then(() => {
+      return sql.query`
+      INSERT INTO Agendamento_ConsultaPreAgendamento (Matricula, DataInclusao, Especialidade, CodigoMotivoAgendamento, PlataformaInsercao)
+      Values (${preAgendamento.matricula}, ${preAgendamento.data}, ${preAgendamento.idEspecialidade}, ${preAgendamento.idMotivo}, ${preAgendamento.plataforma})`
     }).then(result => {
       return result;
     }).catch(err => {

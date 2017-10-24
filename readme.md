@@ -1,7 +1,9 @@
-###Api - Agendamentos
-Api desenvolvida por integrantes do time **Social Health** para consumo de dados na aplicação Ionic.
+### Api - Agendamentos
+
+Api desenvolvida por integrantes do time **Social Health** para consumo de dados na aplicação Ionic [Agenda Médica](https://github.com/RafaelLimaReis/Agenda-saude).
 
 - Dependencias
+    - Vpn conectada com Banco de dados / ou banco local
     - Node v8.6.0 (Desenvolvido e testado)
     - NPM v5.3.0 (Desenvolvido e testado)
     - nodemon v1.12 (Desenvolvido e testado) `npm i nodemon -g`

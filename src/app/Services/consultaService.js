@@ -63,5 +63,47 @@ module.exports = {
           return reject(err);
         })
     })
+  },
+  dadosCadastro: () => {
+    return new Promise((resolve, reject) => {
+      consultaRepository.dadosCadastro()
+        .then(q => {
+          for (let i = 0; i < q.rowsAffected; i++) {
+            q.recordset[i].id = i + 1;
+          }
+          return resolve(q);
+        })
+        .catch(err => {
+          console.log(err);
+          return reject(err);
+        })
+    })
+  },
+  motivo: (id) => {
+    return new Promise((resolve, reject) => {
+      consultaRepository.motivo(id)
+        .then(q => {
+          for (let i = 0; i < q.rowsAffected; i++) {
+            q.recordset[i].id = i + 1;
+          }
+          return resolve(q);
+        })
+        .catch(err => {
+          console.log(err);
+          return reject(err);
+        })
+    })
+  },
+  solicitarPreAgendamento: (preAgendamento) => {
+    return new Promise((resolve, reject) => {
+      consultaRepository.solicitarPreAgendamento(preAgendamento)
+      .then(q => {
+        return resolve(q);
+      })
+      .catch(err => {
+        console.log(err);
+        return reject(err);
+      })
+    })
   }
 }

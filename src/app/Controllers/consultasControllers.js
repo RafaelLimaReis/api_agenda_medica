@@ -85,4 +85,55 @@ module.exports = (app) => {
         return res.status(400).send(error);
       });
   });
+  app.get('/v1/dadosCadastro', (req, res) => {
+    consultaService.dadosCadastro()
+      .then(result => {
+        // verificação de timeout
+        if (result.code === 'ETIMEOUT') {
+          return res.status(408).send({message: 'Request Timeout', error: result.message});
+        };
+
+        // analise de dados        
+        if (result.rowsAffected > 0) {
+          return res.status(200).send({message: 'Dados encontrados', data: result.recordset});
+        } else {
+          return res.status(404).send({message: 'Nenhuma dado foi encontrado'});
+        }
+      })
+      .catch(error => {
+        console.log(error);
+        return res.status(400).send(error);
+      });
+  });
+  app.get('/v1/motivo/:id', (req, res) => {
+    let id = req.params.id;
+    consultaService.motivo(id)
+      .then(result => {
+        // verificação de timeout
+        if (result.code === 'ETIMEOUT') {
+          return res.status(408).send({message: 'Request Timeout', error: result.message});
+        };
+
+        // analise de dados        
+        if (result.rowsAffected > 0) {
+          return res.status(200).send({message: 'Dados encontrados', data: result.recordset});
+        } else {
+          return res.status(404).send({message: 'Nenhuma dado foi encontrado'});
+        }
+      })
+      .catch(error => {
+        console.log(error);
+        return res.status(400).send(error);
+      });
+  });
+  app.post('/v1/solicitarPreAgendamento', (req, res) => {
+    let preAgendamento = req.body;
+    consultaService.solicitarPreAgendamento(preAgendamento)
+      .then(q => {
+        return true;
+      })
+      .catch(err => {
+        return res.status(err.statusCode || 500).send(err);
+      });
+  });
 }
