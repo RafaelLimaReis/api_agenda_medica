@@ -1,0 +1,31 @@
+{
+  "name": "api_agendamento",
+  "version": "1.0.0",
+  "description": "Api para retorno de dados para uso da aplicação em ionic",
+  "main": "index.js",
+  "scripts": {
+    "api": "nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://RafaelLimaReis@bitbucket.org/social_health/api_socialhealth_node.git"
+  },
+  "author": "Team Social Health",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/social_health/api_socialhealth_node#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "consign": "^0.1.6",
+    "express": "^4.16.1",
+    "mssql": "^4.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.8.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.2.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1"
+  }
+}
